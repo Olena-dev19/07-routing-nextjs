@@ -13,6 +13,14 @@ interface FetchNotesResponse {
   totalPages: number;
 }
 
+interface CategoryResponse {
+  id: string;
+  name: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export async function fetchNotes(
   defaultPage: number,
   searchQuery: string
@@ -35,5 +43,10 @@ export async function deleteNote(noteId: string): Promise<Note> {
 
 export async function fetchNoteById(noteId: string): Promise<Note> {
   const response = await axios.get<Note>(`/notes/${noteId}`);
+  return response.data;
+}
+
+export async function getCategory() {
+  const response = await axios.get<CategoryResponse[]>("/categories");
   return response.data;
 }

@@ -10,14 +10,19 @@ import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import css from "@/components/NotesPage/NotesPage.module.css";
 import Pagination from "@/components/Pagination/Pagination";
+import { NoteTag } from "@/types/note";
 
-export default function NotesPageDefault() {
+interface NotesProps {
+  tag: NoteTag | undefined;
+}
+export default function NotesPageDefault({ tag }: NotesProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
+
   const { data, isLoading, isError, isSuccess } = useQuery({
-    queryKey: ["notes", currentPage, searchQuery],
-    queryFn: () => fetchNotes(currentPage, searchQuery),
+    queryKey: ["notes", currentPage, searchQuery, tag],
+    queryFn: () => fetchNotes({ defaultPage: currentPage, searchQuery, tag }),
     placeholderData: keepPreviousData,
   });
   const updateCurrentPage = (page: number) => {

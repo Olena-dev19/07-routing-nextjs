@@ -46,18 +46,3 @@ export default function NoteList({ notes }: NoteListProps) {
     </ul>
   );
 }
-
-// export default function NoteList({ notes }: NoteListProps) {
-//   const [activeId, setActiveId] = useState<string | null>(null);
-//   const queryClient = useQueryClient();
-//   const { mutate: deleteNoteMutation, isPending: isLoading } = useMutation({
-//     mutationFn: (id: string) => deleteNote(id),
-//     onSuccess: () => {
-//       setActiveId(null);
-//       queryClient.invalidateQueries({ queryKey: ['notes'] });
-//     },
-//   });
-//   const handleDelete = (id: string) => {
-//     setActiveId(id);
-//     deleteNoteMutation(id);
-//   };

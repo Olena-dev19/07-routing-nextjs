@@ -14,9 +14,10 @@ interface FetchNotesResponse {
 }
 
 interface FetchNotesParams {
-  defaultPage?: number;
-  searchQuery?: string;
+  page?: number;
+  search?: string;
   tag?: string;
+  perPage?: number;
 }
 
 export async function fetchNotes(

@@ -18,11 +18,12 @@ const NotesByCategory = async ({ params }: NotesByCategoryProps) => {
 
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
-    queryKey: ["notes", 1, "", searchTag],
+    queryKey: ["notes", { currentPage: 1, search: "", searchTag }],
     queryFn: () =>
       fetchNotes({
-        defaultPage: 1,
-        searchQuery: "",
+        page: 1,
+        search: "",
+        perPage: 12,
         tag: searchTag as NoteTag,
       }),
   });

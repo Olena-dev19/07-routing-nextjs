@@ -21,9 +21,11 @@ export default function NotesPageDefault({ tag }: NotesProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const { data, isLoading, isError, isSuccess } = useQuery({
-    queryKey: ["notes", currentPage, searchQuery, tag],
-    queryFn: () => fetchNotes({ defaultPage: currentPage, searchQuery, tag }),
+    queryKey: ["notes", { currentPage, search: searchQuery, tag }],
+    queryFn: () =>
+      fetchNotes({ page: currentPage, search: searchQuery, tag, perPage: 12 }),
     placeholderData: keepPreviousData,
+    refetchOnMount: false,
   });
   const updateCurrentPage = (page: number) => {
     setCurrentPage(page);
